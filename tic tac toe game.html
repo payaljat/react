@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game</title>
+</head>
+<style>
+    body{
+        background-color: rgb(121, 163, 240);
+    }
+
+    h1{
+        margin-top: 0px;
+        text-align: center;
+        font-size: 55px;
+    }
+
+    #player{
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 20px;
+        color: whitesmoke;
+    }
+
+    #box{
+        padding-left: 500px;
+        margin-top: 17px;
+    }
+
+    .tic-tac-toe{
+        height: 100px;
+        width: 100px;
+        border-width: thick;
+        border-color: black;
+        font-size: xx-large;
+        color: white;
+    }
+
+    #edit{
+        margin-left: 495px;
+        margin-right: 25px;
+    }
+
+    .button{
+        height: 50px;
+        width: 152px;
+        font-size: large;
+        border-radius: 15px;
+        background-color: rgb(235, 67, 95);
+        color: white;
+        border: 2px solid black;
+        margin-top: 28px;
+    }
+
+    .button:hover{
+        background-color: white;
+        color:rgb(235, 67, 95);
+    }
+</style>
+<body>
+    
+    <h1>TIC TAC TOE GAME</h1>
+    <p id="player">
+        Player1: X<br>
+        Player2: 0
+    </p>
+
+    <div id="box">
+        <table>
+            <tr>
+                <td><button class="tic-tac-toe" 
+                onclick="game()" id="b1"></button></td>
+
+                <td><button class="tic-tac-toe" 
+                onclick="game()" id="b2"></button></td>
+
+                <td><button class="tic-tac-toe" 
+                onclick="game()" id="b3"></button></td>
+            </tr>
+
+            <tr>
+                <td><button class="tic-tac-toe" 
+                onclick="game()" id="b4"></button></td>
+
+                <td><button class="tic-tac-toe" 
+                onclick="game()" id="b5"></button></td>
+
+                <td><button class="tic-tac-toe" 
+                onclick="game()" id="b6"></button></td>
+            </tr>
+
+            <tr>
+                <td><button class="tic-tac-toe" 
+                onclick="game()" id="b7"></button></td>
+
+                <td><button class="tic-tac-toe" 
+                onclick="game()" id="b8"></button></td>
+
+                <td><button class="tic-tac-toe" 
+                onclick="game()" id="b9"></button></td>
+            </tr>
+        </table>
+    </div>
+
+    <table>
+        <tr>
+            <td>
+                <button type="button" id="edit" onclick="changeName()" 
+                class="button">Edit Player Name</button>
+            </td>
+
+             <td>
+                <button type="button" id="Replay" onclick="Replay()" 
+                class="button">Replay Game</button>
+            </td>
+        </tr>
+    </table>
+</body>
+
+<script>
+    var P1="PLAYER1";
+    var P1="PLAYER2";
+
+    function changeName(){
+        P1=prompt("Name of the player who choose: 'X' !!");
+        P2=prompt("Name of the player who choose: '0' !!");
+
+        var str1=P1+" : X";
+        var str2=P2+" : 0";
+
+        document.getElementById("player").innerHTML=str1+"<br>"+str2;
+        document.getElementById("player").style.color="ANTIQUEWHITE";
+        
+    }
+
+    var flag=true;
+    var t=0;
+    function game(){
+        if(flag==true){
+            document.activeElement.innerHTML="X";
+            document.activeElement.removeAttribute("onclick");
+            document.activeElement.style.backgroundColor="#2a74f0"
+            t++;
+            flag=false;
+
+            var final=checkplayer();
+            if(final=="stop"){
+                document.getElementById("player").innerHTML=P1+"wins !!";
+                document.getElementById("player").style.fontSize="45px";
+                document.getElementById("player").style.color="antiquewhite";
+                document.getElementById("player").style.paddingTop="30px";
+                removeATT();
+            }
+        } 
+        else if(t==9){
+            document.getElementById("player").innerHTML="MATCH DRAW !!";
+        }
+   
+        else {
+           document.activeElement.innerHTML="0";
+           document.activeElement.style.backgroundColor="hotPink";
+           document.activeElement.removeAttribute=("onclick");
+           t++;
+
+           flag=true;
+            var final=checkplayer();
+            if(final=="stop"){
+                document.getElementById("player").innerHTML=P2+"wins !!";
+                document.getElementById("player").style.fontSize="45px";
+                document.getElementById("player").style.color="antiquewhite";
+                document.getElementById("player").style.paddingTop="30px";
+                removeATT();
+            }
+        } 
+    }  
+        
+     
+     function checkplayer(){
+        var str;
+        if((document.getElementById("b1").innerHTML==document.
+        getElementById("b2").innerHTML && document.getElementById("b1").
+        innerHTML==document.getElementById("b3").innerHTML) && ((document.
+        getElementById("b1")=="X")|| (document.getElementById("b1").innerHTML=="0"))){
+
+            str="stop";
+            return str;
+        }
+
+        else if((document.getElementById("b1").innerHTML==document.
+        getElementById("b4").innerHTML && document.getElementById("b1").
+        innerHTML==document.getElementById("b7").innerHTML) && ((document.
+        getElementById("b1")=="X")|| (document.getElementById("b1").innerHTML=="0"))){
+
+            str="stop";
+            return str;
+        }
+
+        else if((document.getElementById("b1").innerHTML==document.
+        getElementById("b5").innerHTML && document.getElementById("b1").
+        innerHTML==document.getElementById("b9").innerHTML) && ((document.
+        getElementById("b1")=="X")|| (document.getElementById("b1").innerHTML=="0"))){
+
+            str="stop";
+            return str;
+        }
+
+        else if((document.getElementById("b3").innerHTML==document.
+        getElementById("b6").innerHTML && document.getElementById("b9").
+        innerHTML==document.getElementById("b3").innerHTML) && ((document.
+        getElementById("b3")=="X")|| (document.getElementById("b3").innerHTML=="0"))){
+
+            str="stop";
+            return str;
+        }
+
+        else if((document.getElementById("b3").innerHTML==document.
+        getElementById("b5").innerHTML && document.getElementById("b3").
+        innerHTML==document.getElementById("b7").innerHTML) && ((document.
+        getElementById("b3")=="X")|| (document.getElementById("b3").innerHTML=="0"))){
+
+            str="stop";
+            return str;
+        }
+
+        else if((document.getElementById("b7").innerHTML==document.
+        getElementById("b8").innerHTML && document.getElementById("b7").
+        innerHTML==document.getElementById("b9").innerHTML) && ((document.
+        getElementById("b7")=="X")|| (document.getElementById("b7").innerHTML=="0"))){
+
+            str="stop";
+            return str;
+        }
+
+        else if((document.getElementById("b4").innerHTML==document.
+        getElementById("b6").innerHTML && document.getElementById("b4").
+        innerHTML==document.getElementById("b5").innerHTML) && ((document.
+        getElementById("b4")=="X")|| (document.getElementById("b4").innerHTML=="0"))){
+
+            str="stop";
+            return str;
+        }
+
+        else if((document.getElementById("b2").innerHTML==document.
+        getElementById("b5").innerHTML && document.getElementById("b2").
+        innerHTML==document.getElementById("b8").innerHTML) && ((document.
+        getElementById("b2")=="X")|| (document.getElementById("b2").innerHTML=="0"))){
+
+            str="stop";
+            return str;
+        }
+     }
+
+     //remove attribute
+
+     function removeATT(){
+        document.getElementById("b1").removeAttribute("onclick");
+        document.getElementById("b2").removeAttribute("onclick");
+        document.getElementById("b3").removeAttribute("onclick"); 
+        document.getElementById("b4").removeAttribute("onclick");
+        document.getElementById("b5").removeAttribute("onclick");
+        document.getElementById("b6").removeAttribute("onclick");
+        document.getElementById("b7").removeAttribute("onclick");
+        document.getElementById("b8").removeAttribute("onclick");
+        document.getElementById("b9").removeAttribute("onclick");
+     }
+
+     //replay game
+
+     function replay(){
+        window.location.reload();
+     }
+
+</script>
+</html>
